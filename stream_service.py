@@ -26,7 +26,14 @@ Stream service will be
  - used to create stream using create_stream
  - keep info of all streams using stream_list
  - 
+ 
+ Function
+ will create a new fodler. 
+ each stream will have a new folder
+ it will have topics and then the logs will be save in it
 
+ the metadata of streams will be stroed in a separate json 
+ stream service will uyse this json
 """
 
 class StreamService:
