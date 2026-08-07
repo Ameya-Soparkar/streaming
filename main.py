@@ -24,17 +24,21 @@ def add_to_queue(queue):
         payload = {'name': names[r], 'version':version[r]}
          
         queue.put(payload)
-        time.sleep(0.5)
     print("[Producer] Done producing. Sending stop signal.")
     queue.put(None)
     
 
 # append in log
 def append_to_log(queue):
+    n=0
     while True:
+        if queue.empty():
+            n=n+1
+            print('Queue found empty')
+
         payload = queue.get()
         print(f'[Consumer] getting from queue {payload}')
-
+        
         if payload is None:
             queue.task_done()
             break
@@ -42,6 +46,7 @@ def append_to_log(queue):
         print(f"Adding to log {payload}")
 
         stream_user.stream_logic(payload)
+    print(n)
     print("[Consumer] Done processing. Exiting.")
 
 
