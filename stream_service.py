@@ -5,6 +5,7 @@ import logging
 class Stream:
     def __init__(self, name):
         self.name = name + '.log'
+        logging.basicConfig(filename = self.name, filemode = 'a', level=logging.INFO, format='%(acetime)s - %(message)s')
 
     def assign_topic(self, topic_name):
         pass
@@ -13,7 +14,6 @@ class Stream:
         pass
 
     def stream_logic(self , payload):
-        logging.basicConfig(filename = self.name, filemode = 'a', level=logging.INFO, format='%(acetime)s - %(message)s')
         with open(self.name , 'a') as log_file:
             log_file.write(f"{datetime.now()} - {payload}\n")
         
